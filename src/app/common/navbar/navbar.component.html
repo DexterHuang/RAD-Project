@@ -1,3 +1,25 @@
+<div class="ui secondary  menu">
+  <a [routerLink]="['home']" class="item active">
+    Home
+  </a>
+  <a [routerLink]="['contact']" class="item">
+    Contact
+  </a>
+  <a [routerLink]="['menu']" class="item">
+    Menu
+  </a>
+  <div class="right menu">
+    <div class="item">
+      <div class="ui icon input">
+        <input type="text" placeholder="Search...">
+        <i class="search link icon"></i>
+      </div>
+    </div>
+    <a class="ui item">
+      Logout
+    </a>
+  </div>
+</div>
 
 
 <router-outlet></router-outlet>
