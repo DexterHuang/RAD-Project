@@ -1,18 +1,30 @@
-<div class="ui animated button" tabindex="0">
-  <div class="visible content">Next</div>
-  <div class="hidden content">
-    <i class="right arrow icon"></i>
+<div class="ui container">
+
+  <h1>WELCOME MOTHERFUCKER!</h1>
+  <div class="ui grid">
+    <div class="six wide column">
+      <div class="ui animated button fade"
+        tabindex="0" aria-label="Post Trip"
+        [routerLink]="['/postRequest']">
+        <div class="visible content">
+          Post Request</div>
+        <div class="hidden content">
+          For Buyers
+        </div>
+      </div>
+    </div>
+    <div class="six wide column">
+      <div class="ui animated button fade"
+        tabindex="0" aria-label="Post Trip"
+        [routerLink]="['/postTrip']">
+        <div class="visible content">
+          Post Trip</div>
+        <div class="hidden content">
+          For Sellers
+        </div>
+      </div>
+    </div>
+
   </div>
-</div>
-<div class="ui vertical animated button" tabindex="0">
-  <div class="hidden content">Shop</div>
-  <div class="visible content">
-    <i class="shop icon"></i>
-  </div>
-</div>
-<div class="ui animated fade button" tabindex="0">
-  <div class="visible content">I changed this</div>
-  <div class="hidden content">
-    asdjasndjksan
-  </div>
+
 </div>
