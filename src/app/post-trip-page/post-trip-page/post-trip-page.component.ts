@@ -1,3 +1,4 @@
+import { CountryService } from './../../service/country/country/country.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
@@ -6,9 +7,13 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
   styleUrls: ['./post-trip-page.component.css']
 })
 export class PostTripPageComponent implements OnInit {
-  startDate: Date;
-  constructor() { }
+  arrivalDate: Date;
+  constructor(private countryService: CountryService) { }
 
   ngOnInit() {
+
+  }
+  getCountries() {
+    return this.countryService.getCountryNames();
   }
 }

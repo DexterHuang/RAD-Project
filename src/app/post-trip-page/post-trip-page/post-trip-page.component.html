@@ -1,13 +1,40 @@
-<div class="ui container">
+<div class="ui container segments">
   <div class="ui form">
-    <div class="field">
-      <label>Date</label>
-      <div class="ui left icon input">
-        <i class="calendar icon"></i>
-        <input suiDatepicker [(ngModel)]="startDate"
-          [pickerMode]="'date'" [pickerUseNativeOnMobile]="false">
+    <div class="ui segment">
+      <div class="ui grid">
+        <div class="field six wide column">
+          <label>Arrival date</label>
+          <div class="ui left icon input">
+            <i class="calendar icon"></i>
+            <input suiDatepicker [(ngModel)]="arrivalDate"
+              [pickerMode]="'date'"
+              [pickerUseNativeOnMobile]="false">
+          </div>
+        </div>
+
+        <div class="field six wide column">
+          <label>Trip finish date</label>
+          <div class="ui left icon input">
+            <i class="calendar icon"></i>
+            <input suiDatepicker [(ngModel)]="arrivalDate"
+              [pickerMode]="'date'"
+              [pickerUseNativeOnMobile]="false">
+          </div>
+        </div>
       </div>
     </div>
-    <p>Selected Date: {{ startDate}}</p>
+
+    <div class="ui segment">
+      <sui-select class="selection" labelField="name"
+        [isSearchable]="true" #select
+        [isDisabled]="getCountries().length <= 0">
+        <div *ngFor="let country of getCountries()">
+          <sui-select-option [value]="'asdasd'">
+          </sui-select-option>
+
+        </div>
+      </sui-select>
+    </div>
+
   </div>
 </div>
