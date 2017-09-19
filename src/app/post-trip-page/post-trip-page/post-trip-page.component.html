@@ -1,0 +1,13 @@
+<div class="ui container">
+  <div class="ui form">
+    <div class="field">
+      <label>Date</label>
+      <div class="ui left icon input">
+        <i class="calendar icon"></i>
+        <input suiDatepicker [(ngModel)]="startDate"
+          [pickerMode]="'date'" [pickerUseNativeOnMobile]="false">
+      </div>
+    </div>
+    <p>Selected Date: {{ startDate}}</p>
+  </div>
+</div>
