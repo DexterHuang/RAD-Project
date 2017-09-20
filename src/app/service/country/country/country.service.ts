@@ -17,7 +17,6 @@ export class CountryService {
 
         }
       });
-      console.log(this.nameList);
     });
   }
   getCountryNames() {
