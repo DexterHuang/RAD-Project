@@ -1,3 +1,4 @@
+import { LoginPageComponent } from './login-page/login-page/login-page.component';
 import { PostRequestPageComponent } from './post-request-page/post-request-page/post-request-page.component';
 import { PostTripPageComponent } from './post-trip-page/post-trip-page/post-trip-page.component';
 import { MenuPageComponent } from './menu-page/menu-page/menu-page.component';
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'contact', component: ContactPageComponent },
   { path: 'menu', component: MenuPageComponent },
   { path: 'postTrip', component: PostTripPageComponent },
-  { path: 'postRequest', component: PostRequestPageComponent }
+  { path: 'postRequest', component: PostRequestPageComponent },
+  { path: 'login', component: LoginPageComponent }
 ];
 
 @NgModule({

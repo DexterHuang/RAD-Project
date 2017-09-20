@@ -1,3 +1,4 @@
+import { UserService } from './service/user/user/user.service';
 import { CountryService } from './service/country/country/country.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -12,6 +13,7 @@ import { PostTripPageComponent } from './post-trip-page/post-trip-page/post-trip
 import { PostRequestPageComponent } from './post-request-page/post-request-page/post-request-page.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginPageComponent } from './login-page/login-page/login-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,14 +22,15 @@ import { HttpClientModule } from '@angular/common/http';
     ContactPageComponent,
     MenuPageComponent,
     PostTripPageComponent,
-    PostRequestPageComponent
+    PostRequestPageComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule,
     AppRoutingModule,
     SuiModule
   ],
-  providers: [CountryService],
+  providers: [CountryService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
