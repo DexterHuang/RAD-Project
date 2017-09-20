@@ -6,7 +6,7 @@
           <label>Arrival date</label>
           <div class="ui left icon input">
             <i class="calendar icon"></i>
-            <input suiDatepicker [(ngModel)]="arrivalDate"
+            <input suiDatepicker [(ngModel)]="this.trip.fromDate"
               [pickerMode]="'date'"
               [pickerUseNativeOnMobile]="false">
           </div>
@@ -16,7 +16,7 @@
           <label>Trip finish date</label>
           <div class="ui left icon input">
             <i class="calendar icon"></i>
-            <input suiDatepicker [(ngModel)]="arrivalDate"
+            <input suiDatepicker [(ngModel)]="this.trip.toDate"
               [pickerMode]="'date'"
               [pickerUseNativeOnMobile]="false">
           </div>
@@ -24,17 +24,46 @@
       </div>
     </div>
 
-    <div class="ui segment">
+    <!-- <div class="ui segment">
       <sui-select class="selection" labelField="name"
-        [isSearchable]="true" #select
+        [isSearchable]="false" #select
+        [options]="this.getCountries()"
         [isDisabled]="getCountries().length <= 0">
-        <div *ngFor="let country of getCountries()">
-          <sui-select-option [value]="'asdasd'">
-          </sui-select-option>
-
-        </div>
+        <sui-select-option *ngFor="let option of this.getCountries()"
+          [value]="option">
+          {{option}}
+        </sui-select-option>
       </sui-select>
-    </div>
+    </div> -->
+    <div class="ui segment">
 
+      <div class="ui grid">
+        <div class="field six wide column">
+          <label>I am from</label>
+          <sui-select [(ngModel)]="this.trip.fromCountry"
+            [optionsFilter]="countryFilter"
+            [isSearchable]="true"
+            [options]="this.getCountries()"
+            #selectFrom>
+            <sui-select-option *ngFor="let option of selectFrom.filteredOptions "
+              [value]="option">{{option}}
+            </sui-select-option>
+          </sui-select>
+        </div>
+        <div class="field six wide column">
+          <label>I am going to</label>
+          <sui-select [(ngModel)]="this.trip.toCountry"
+            [optionsFilter]="countryFilter"
+            [isSearchable]="true"
+            [options]="this.getCountries()"
+            #selectTo>
+            <sui-select-option *ngFor="let option of selectTo.filteredOptions "
+              [value]="option">{{option}}
+            </sui-select-option>
+          </sui-select>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
