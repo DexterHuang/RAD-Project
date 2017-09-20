@@ -1,0 +1,18 @@
+import { UserService } from './../../service/user/user/user.service';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-login-page',
+  templateUrl: './login-page.component.html',
+  styleUrls: ['./login-page.component.css']
+})
+export class LoginPageComponent implements OnInit {
+
+  constructor(private userService: UserService) { }
+
+  ngOnInit() {
+  }
+  onClickGoogleLogin() {
+    this.userService.SignIn();
+  }
+}
