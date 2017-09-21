@@ -1,3 +1,4 @@
+import { ThreadService } from './service/thread/ThreadService';
 import { UserService } from './service/user/user/user.service';
 import { CountryService } from './service/country/country/country.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -30,7 +31,7 @@ import { LoginPageComponent } from './login-page/login-page/login-page.component
     AppRoutingModule,
     SuiModule
   ],
-  providers: [CountryService, UserService],
+  providers: [CountryService, UserService, ThreadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

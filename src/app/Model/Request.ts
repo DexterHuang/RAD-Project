@@ -1,4 +1,4 @@
-import * as firebase from 'firebase';
+import { ObjectHelper } from './../Utility/ObjectHelper';
 
 export class Request {
     creatorUid: string;
@@ -8,9 +8,12 @@ export class Request {
     description: string;
     itemName: string;
     soldLocation: string;
-
+    transactionLocation: string;
+    uid: string;
+    retailPrice: number;
+    paymentPrice: number;
     public save() {
-
+        return ObjectHelper.updateToFirebase(this, 'requests/');
     }
 
 }
