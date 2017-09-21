@@ -1,3 +1,6 @@
+import { Router } from '@angular/router';
+import { UserService } from './../../service/user/user/user.service';
+import { ThreadService } from './../../service/thread/ThreadService';
 import { Trip } from './../../Model/Trip';
 import { CountryService } from './../../service/country/country/country.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
@@ -10,10 +13,17 @@ import * as firebase from 'firebase';
 })
 export class PostTripPageComponent implements OnInit {
   trip: Trip = new Trip();
-  constructor(private countryService: CountryService) { }
+  constructor(private countryService: CountryService,
+    private threadService: ThreadService,
+    private userService: UserService,
+    private router: Router) { }
 
   ngOnInit() {
-
+    this.threadService.waitForServices(() => {
+      if (this.userService.IsSignedIn() === false) {
+        this.router.navigate(['/home']);
+      }
+    });
   }
   getCountries() {
     return this.countryService.getCountryNames();

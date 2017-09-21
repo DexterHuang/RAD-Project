@@ -1,3 +1,79 @@
-<p>
-  post-request-page works!
-</p>
+<form class="ui form container">
+  <h4 class="ui dividing header">Request Information</h4>
+  <div class="field">
+    <label>Title</label>
+    <div class="field">
+      <input type="text" placeholder="Title"
+        name="title" [(ngModel)]="this.request.title">
+    </div>
+
+    <label>Details</label>
+    <div class="field">
+      <textarea type="text" placeholder="Details"
+        name="description" [(ngModel)]="this.request.description"></textarea>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="field six wide column">
+      <label>Arrival date</label>
+      <div class="ui left icon input">
+        <i class="calendar icon"></i>
+        <input suiDatepicker name="fromDate"
+          [(ngModel)]="this.request.fromDate"
+          [pickerMode]="'date'" [pickerUseNativeOnMobile]="false">
+      </div>
+    </div>
+
+    <div class="field six wide column">
+      <label>Trip finish date</label>
+      <div class="ui left icon input">
+        <i class="calendar icon"></i>
+        <input suiDatepicker name="toDate"
+          [(ngModel)]="this.request.toDate"
+          [pickerMode]="'date'" [pickerUseNativeOnMobile]="false">
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label>About the Item</label>
+    <div class="three fields">
+      <div class="twelve wide field">
+        <input type="text" placeholder="Item name"
+          name="itemName" [(ngModel)]="this.request.itemName">
+      </div>
+      <div class="twelve wide field">
+        <input type="number" placeholder="Retail price"
+          name="retailPrice" [(ngModel)]="this.request.retailPrice">
+      </div>
+      <div class="twelve wide field">
+        <input type="number" placeholder="I am willing to pay.."
+          name="paymentPrice" [(ngModel)]="this.request.paymentPrice">
+      </div>
+    </div>
+
+  </div>
+  <div class="field">
+    <label>There can this item be bought at</label>
+    <select class="ui fluid dropdown"
+      name="soldLocation" [(ngModel)]="this.request.soldLocation">
+        <option value="{{name}}" 
+        *ngFor="let name of this.getCountryNames()">{{name}}</option>
+    </select>
+  </div>
+  <div class="field">
+    <label>Face to face transaction at</label>
+    <select class="ui fluid dropdown"
+      name="transactionLocation"
+      [(ngModel)]="this.request.transactionLocation">
+        <option value="{{name}}" 
+        *ngFor="let name of this.getCountryNames()">{{name}}</option>
+    </select>
+  </div>
+  <button class="ui icon button"
+    aria-label="label" [ngClass]="this.isFormValid()?'': 'disabled'"
+    (click)="this.onClickSend()">
+    <i class="send icon"></i>
+    Send
+  </button>
+</form>
