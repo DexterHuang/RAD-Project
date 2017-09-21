@@ -7,6 +7,7 @@ import * as firebase from 'firebase';
 export class UserService {
   private currentFirebaseUser: firebase.User;
   private currentUser: User;
+  public initialized = false;
   constructor() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -14,6 +15,7 @@ export class UserService {
         firebase.database().ref('users/' + user.uid).once('value', e => {
           if (e.exists()) {
             this.currentUser = ObjectHelper.toObject(e.val(), User);
+            this.initialized = true;
           } else {
             const u = new User();
             u.uid = user.uid;
@@ -22,9 +24,11 @@ export class UserService {
             u.photoURL = user.photoURL;
             this.currentUser = u;
             firebase.database().ref('users/' + user.uid).update(u).then();
+            this.initialized = true;
           }
         });
       } else {
+        this.initialized = true;
         this.currentFirebaseUser = null;
       }
     });
