@@ -63,7 +63,17 @@
           </sui-select>
         </div>
       </div>
+    </div>
+
+
+    <div class="ui segment">
+      <button class="ui basic button"
+        (click)="onClickSend()" [ngClass]="this.isFormValid()?'':'disabled'">
+              <i class="icon send"></i>
+              Post
+            </button>
 
     </div>
+
   </div>
 </div>

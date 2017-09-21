@@ -1,11 +1,12 @@
 <div class="ui secondary  menu">
-  <a [routerLink]="['home']" class="item active">
+  <a [routerLink]="['/home']" class="item active">
     Home
   </a>
-  <a [routerLink]="['contact']" class="item">
+  <a [routerLink]="['/contact']"
+    class="item">
     Contact
   </a>
-  <a [routerLink]="['menu']" class="item">
+  <a [routerLink]="['/menu']" class="item">
     Menu
   </a>
   <div class="right menu">
@@ -15,7 +16,12 @@
         <i class="search link icon"></i>
       </div>
     </div>
-    <a class="ui item">
+    <a *ngIf="!this.isSignedIn()" class="ui item"
+      [routerLink]="['/login']">
+      Login
+    </a>
+    <a *ngIf="this.isSignedIn()" class="ui item"
+      (click)="onClickSignOut()">
       Logout
     </a>
   </div>

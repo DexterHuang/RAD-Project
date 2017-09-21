@@ -1,6 +1,6 @@
 export class User {
-    emailVerified: boolean;
-    isAnonymous: boolean;
-    phoneNumber: string | null;
-    refreshToken: string;
+    uid: string;
+    email: string;
+    photoURL: string;
+    displayName: string;
 }

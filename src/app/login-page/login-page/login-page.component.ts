@@ -13,6 +13,6 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {
   }
   onClickGoogleLogin() {
-    this.userService.SignIn();
+    this.userService.signIn();
   }
 }
