@@ -1,3 +1,5 @@
+import * as firebase from 'firebase';
+
 export class ObjectHelper {
 
     public static toObject<T>(firebaseObject: any, type: { new(): T; }) {
@@ -19,5 +21,16 @@ export class ObjectHelper {
         } else if (o instanceof Date) {
             return o;
         }
+    }
+    public static updateToFirebase(o: { uid: string }, path: string) {
+        if (path.endsWith('/') === false) {
+            path += '/';
+        }
+        ObjectHelper.convertInvalidData(o);
+        if (o.uid === undefined) {
+            const ref = firebase.database().ref(path).push();
+            o.uid = ref.key;
+        }
+        return firebase.database().ref(path + o.uid).update(o);
     }
 }
