@@ -1,3 +1,4 @@
+import { RequestService } from './../../service/request/request/request.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
@@ -7,8 +8,11 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private requestService: RequestService) { }
 
   ngOnInit() {
+  }
+  getRequests() {
+    return this.requestService.getRequests();
   }
 }
