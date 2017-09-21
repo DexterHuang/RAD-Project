@@ -33,4 +33,24 @@ export class ObjectHelper {
         }
         return firebase.database().ref(path + o.uid).update(o);
     }
+    public static pullObjectsFromFirebase<T>(
+        path: string,
+        type: { new(): T; }): Promise<T[]> {
+        return new Promise<T[]>((resolve, reject) => {
+            if (path.endsWith('/') === false) {
+                path += '/';
+            }
+            firebase.database().ref(path).on('value', e => {
+                const list: T[] = [];
+                if (e.exists()) {
+                    const o = e.val();
+                    Object.keys(o).forEach(key => {
+                        const newObject: T = this.toObject(o[key], type);
+                        list.push(newObject);
+                    });
+                }
+                resolve(list);
+            });
+        });
+    }
 }
