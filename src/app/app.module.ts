@@ -1,3 +1,5 @@
+import { TripService } from './service/trip/trip/trip.service';
+import { RequestService } from './service/request/request/request.service';
 import { ThreadService } from './service/thread/ThreadService';
 import { UserService } from './service/user/user/user.service';
 import { CountryService } from './service/country/country/country.service';
@@ -15,6 +17,8 @@ import { PostRequestPageComponent } from './post-request-page/post-request-page/
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginPageComponent } from './login-page/login-page/login-page.component';
+import { RequestListComponent } from './common/request-list/request-list/request-list.component';
+import { RequestListItemComponent } from './common/request-list/request-list-item/request-list-item.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,14 +28,16 @@ import { LoginPageComponent } from './login-page/login-page/login-page.component
     MenuPageComponent,
     PostTripPageComponent,
     PostRequestPageComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    RequestListComponent,
+    RequestListItemComponent
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule,
     AppRoutingModule,
     SuiModule
   ],
-  providers: [CountryService, UserService, ThreadService],
+  providers: [CountryService, UserService, ThreadService, RequestService, TripService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
