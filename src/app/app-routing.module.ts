@@ -1,3 +1,5 @@
+import { TripsPageComponent } from './trips-page/trips-page/trips-page.component';
+import { RequestsPageComponent } from './requests-page/requests-page/requests-page.component';
 import { LoginPageComponent } from './login-page/login-page/login-page.component';
 import { PostRequestPageComponent } from './post-request-page/post-request-page/post-request-page.component';
 import { PostTripPageComponent } from './post-trip-page/post-trip-page/post-trip-page.component';
@@ -14,7 +16,9 @@ const routes: Routes = [
   { path: 'menu', component: MenuPageComponent },
   { path: 'postTrip', component: PostTripPageComponent },
   { path: 'postRequest', component: PostRequestPageComponent },
-  { path: 'login', component: LoginPageComponent }
+  { path: 'login', component: LoginPageComponent },
+  { path: 'requests', component: RequestsPageComponent },
+  { path: 'trips', component: TripsPageComponent }
 ];
 
 @NgModule({

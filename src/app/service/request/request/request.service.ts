@@ -9,7 +9,7 @@ export class RequestService {
   initialized = false;
   private requests: Request[] = [];
   constructor() {
-    ObjectHelper.pullObjectsFromFirebase('requests/', Request).then(list => {
+    ObjectHelper.pullObjectsFromFirebase('requests/', Request, list => {
       this.requests = list;
       this.initialized = true;
     });

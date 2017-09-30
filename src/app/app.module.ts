@@ -19,6 +19,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginPageComponent } from './login-page/login-page/login-page.component';
 import { RequestListComponent } from './common/request-list/request-list/request-list.component';
 import { RequestListItemComponent } from './common/request-list/request-list-item/request-list-item.component';
+import { RequestsPageComponent } from './requests-page/requests-page/requests-page.component';
+import { TripsPageComponent } from './trips-page/trips-page/trips-page.component';
+import { TripListComponent } from './common/trip-list/trip-list/trip-list.component';
+import { TripListItemComponent } from './common/trip-list/trip-list-item/trip-list-item.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +34,11 @@ import { RequestListItemComponent } from './common/request-list/request-list-ite
     PostRequestPageComponent,
     LoginPageComponent,
     RequestListComponent,
-    RequestListItemComponent
+    RequestListItemComponent,
+    RequestsPageComponent,
+    TripsPageComponent,
+    TripListComponent,
+    TripListItemComponent,
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule,

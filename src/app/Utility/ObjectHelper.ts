@@ -1,4 +1,5 @@
 import * as firebase from 'firebase';
+import { Observable } from 'rxjs/Observable';
 
 export class ObjectHelper {
 
@@ -35,22 +36,21 @@ export class ObjectHelper {
     }
     public static pullObjectsFromFirebase<T>(
         path: string,
-        type: { new(): T; }): Promise<T[]> {
-        return new Promise<T[]>((resolve, reject) => {
-            if (path.endsWith('/') === false) {
-                path += '/';
+        type: { new(): T; },
+        callback: (list: T[]) => any) {
+        if (path.endsWith('/') === false) {
+            path += '/';
+        }
+        firebase.database().ref(path).on('value', e => {
+            const list: T[] = [];
+            if (e.exists()) {
+                const o = e.val();
+                Object.keys(o).forEach(key => {
+                    const newObject: T = this.toObject(o[key], type);
+                    list.push(newObject);
+                });
             }
-            firebase.database().ref(path).on('value', e => {
-                const list: T[] = [];
-                if (e.exists()) {
-                    const o = e.val();
-                    Object.keys(o).forEach(key => {
-                        const newObject: T = this.toObject(o[key], type);
-                        list.push(newObject);
-                    });
-                }
-                resolve(list);
-            });
+            callback(list);
         });
     }
 }
