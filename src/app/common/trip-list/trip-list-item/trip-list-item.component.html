@@ -1,3 +1,24 @@
-<p>
-  trip-list-item works!
-</p>
+<div class="ui cards">
+  <div class="card">
+    <div class="content">
+      <div class="header">
+        {{this.trip.userName}}
+      </div>
+      <div class="meta">
+        {{this.trip.getFromDate().toLocaleDateString()}}
+        to {{this.trip.getToDate().toLocaleDateString()}}
+      </div>
+      <div class="description">
+        {{this.trip.userName}} is going
+        to {{this.trip.toCountry}}
+        from {{this.trip.fromCountry}}
+      </div>
+    </div>
+    <div class="extra content">
+      <div class="ui one buttons">
+        <div class="ui basic green button"
+          [routerLink]="['../inbox/chatRoom/' + this.trip.userUid]">Contact</div>
+      </div>
+    </div>
+  </div>
+</div>

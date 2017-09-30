@@ -3,10 +3,17 @@ import { Observable } from 'rxjs/Observable';
 
 export class ObjectHelper {
 
-    public static toObject<T>(firebaseObject: any, type: { new(): T; }) {
+    public static toObject<T>(object: any, type: { new(): T; }) {
         const newType: T = new type();
-        Object.assign(newType, firebaseObject);
+        Object.assign(newType, object);
         return newType;
+    }
+    public static toObjectList<T>(list: any[], type: { new(): T; }) {
+        const newList: T[] = [];
+        list.forEach(obj => {
+            newList.push(this.toObject(obj, type));
+        });
+        return newList;
     }
     public static convertInvalidData<T>(o: any) {
         Object.keys(o).forEach(key => {
@@ -41,7 +48,7 @@ export class ObjectHelper {
         if (path.endsWith('/') === false) {
             path += '/';
         }
-        firebase.database().ref(path).on('value', e => {
+        return firebase.database().ref(path).on('value', e => {
             const list: T[] = [];
             if (e.exists()) {
                 const o = e.val();

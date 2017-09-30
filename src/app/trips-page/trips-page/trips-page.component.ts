@@ -1,3 +1,4 @@
+import { TripService } from './../../service/trip/trip/trip.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TripsPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private tripService: TripService) { }
 
   ngOnInit() {
   }
-
+  getTrips() {
+    return this.tripService.getTrips();
+  }
 }

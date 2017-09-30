@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { UserService } from './../../service/user/user/user.service';
 import { ThreadService } from './../../service/thread/ThreadService';
 import { Component, OnInit } from '@angular/core';
-
+import * as firebase from 'firebase';
 @Component({
   selector: 'app-post-request-page',
   templateUrl: './post-request-page.component.html',
@@ -12,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostRequestPageComponent implements OnInit {
   request: Request = new Request();
+  selectedFiles: File[] = [];
   constructor(private threadService: ThreadService,
     private userService: UserService,
     private router: Router,
@@ -50,12 +51,30 @@ export class PostRequestPageComponent implements OnInit {
       return true;
     }
   }
-  onClickSend() {
+  async onClickSend() {
     if (this.isFormValid()) {
-      this.request.save().then(e => {
-        this.router.navigate(['/home']);
-      });
-      this.request = new Request();
+      this.request.uid = firebase.database().ref('requests').push().key;
+      for (const file of this.selectedFiles) {
+        const url: string = await this.uploadImage(file, this.request.uid);
+        this.request.imageURLs.push(url);
+      }
+      this.request.creatorUid = this.userService.getCurrentUser().uid;
+      await this.request.save();
+      this.router.navigate(['/home']);
     }
+  }
+  uploadImage(file: File, uid: string) {
+    return new Promise<string>((resolve, reject) => {
+      firebase.storage().ref('images/' + uid + '/' + file.name).put(file).then(e => {
+        resolve(e.downloadURL);
+      });
+    });
+  }
+  onFileChange(e: any) {
+    const files: any = e.target.files;
+    this.selectedFiles = Object.keys(files)
+      .filter(key => key !== 'length')
+      .map(key => files[key])
+      .filter((file: File) => file.type.includes('image/'));
   }
 }

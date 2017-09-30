@@ -1,3 +1,4 @@
+import { Inbox } from './../../../Model/Inbox';
 import { ObjectHelper } from './../../../Utility/ObjectHelper';
 import { User } from './../../../Model/User';
 import { Injectable } from '@angular/core';
@@ -8,29 +9,41 @@ export class UserService {
   private currentFirebaseUser: firebase.User;
   private currentUser: User;
   public initialized = false;
+  private inbox: Inbox;
+  private inboxListener = null;
   constructor() {
-    firebase.auth().onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged(async (user) => {
+      if (this.inboxListener !== null) {
+        this.inboxListener.remove();
+      }
       if (user) {
         this.currentFirebaseUser = user;
-        firebase.database().ref('users/' + user.uid).once('value', e => {
-          if (e.exists()) {
-            this.currentUser = ObjectHelper.toObject(e.val(), User);
-            this.initialized = true;
+        const e = await firebase.database().ref('users/' + user.uid).once('value');
+        if (e.exists()) {
+          this.currentUser = ObjectHelper.toObject(e.val(), User);
+        } else {
+          const u = new User();
+          u.uid = user.uid;
+          u.displayName = user.displayName;
+          u.email = user.email;
+          u.photoURL = user.photoURL;
+          this.currentUser = u;
+          await firebase.database().ref('users/' + user.uid).update(u);
+        }
+        const inboxRef = firebase.database().ref('inboxes/' + user.uid);
+        this.inboxListener = await inboxRef.on('value', async (ee) => {
+          if (ee.exists()) {
+            this.inbox = ObjectHelper.toObject(ee.val(), Inbox);
           } else {
-            const u = new User();
-            u.uid = user.uid;
-            u.displayName = user.displayName;
-            u.email = user.email;
-            u.photoURL = user.photoURL;
-            this.currentUser = u;
-            firebase.database().ref('users/' + user.uid).update(u).then();
-            this.initialized = true;
+            const inbox = new Inbox();
+            inbox.userUid = user.uid;
+            await inbox.update();
           }
         });
       } else {
-        this.initialized = true;
         this.currentFirebaseUser = null;
       }
+      this.initialized = true;
     });
   }
   public signIn() {
@@ -46,5 +59,11 @@ export class UserService {
   }
   public signOut() {
     firebase.auth().signOut();
+  }
+  public getCurrentUser() {
+    return this.currentUser;
+  }
+  public getInbox() {
+    return this.inbox;
   }
 }

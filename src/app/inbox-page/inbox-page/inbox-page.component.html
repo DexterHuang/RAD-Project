@@ -1,0 +1,12 @@
+<div class="ui container">
+  <div class="ui middle aligned animated list"
+    *ngIf="this.getInbox()">
+    <a class="item" *ngFor="let chatRoom of this.getInbox().getChatRooms()"
+      [routerLink]="['chatRoom/' + chatRoom.uid]">
+      <img class="ui avatar image" src="{{chatRoom.getUser().photoURL}}">
+      <div class="content">
+        <div class="header">{{chatRoom.getUser().displayName}}</div>
+      </div>
+    </a>
+  </div>
+</div>

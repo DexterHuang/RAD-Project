@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Trip } from './../../../Model/Trip';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-trip-list',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./trip-list.component.css']
 })
 export class TripListComponent implements OnInit {
-
+  @Input() Trips: Trip[] = [];
   constructor() { }
 
   ngOnInit() {

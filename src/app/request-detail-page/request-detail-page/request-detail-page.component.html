@@ -1,0 +1,36 @@
+<div class="ui segment" *ngIf="!this.getRequest()"
+  style="height:100%">
+  <div class="ui active dimmer">
+    <div class="ui text loader">Loading</div>
+  </div>
+  <p></p>
+</div>
+<div class="ui container" *ngIf="this.getRequest()">
+  <h1>{{this.getRequest().title}}</h1>
+  <h4> {{this.getRequest().getCreator().displayName}}
+    wants to buy {{this.getRequest().itemName}}
+    from {{this.getRequest().soldLocation}}
+    with retail price of {{this.getRequest().retailPrice}}
+    SGD with {{this.getRequest().paymentPrice}}
+    SGD, doing this trade you will
+    earn {{this.getRequest().retailPrice
+    - this.getRequest().paymentPrice}}
+    SGD
+  </h4>
+  <p>{{this.getRequest().description}}</p>
+  <button class="ui labeled icon button right send-button"
+    aria-label="label" (click)="onClickSend()">
+   <i class="send icon"></i>
+   message {{this.getRequest().getCreator().displayName}}
+ </button>
+
+  <div class="ui three stackable cards">
+    <div class="card" *ngFor="let image of this.getRequest().imageURLs">
+      <div class="image">
+        <img src="{{image}}">
+      </div>
+    </div>
+  </div>
+
+
+</div>

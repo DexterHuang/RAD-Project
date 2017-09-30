@@ -1,3 +1,5 @@
+import { UserHelper } from './../Utility/UserHelper';
+import { User } from './User';
 import { ObjectHelper } from './../Utility/ObjectHelper';
 
 export class Request {
@@ -12,8 +14,11 @@ export class Request {
     uid: string;
     retailPrice: number;
     paymentPrice: number;
+    imageURLs: string[] = [];
     public save() {
         return ObjectHelper.updateToFirebase(this, 'requests/');
     }
-
+    getCreator(): User {
+        return UserHelper.getUser(this.creatorUid);
+    }
 }

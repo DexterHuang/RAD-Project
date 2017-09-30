@@ -1,0 +1,44 @@
+<div class="ui container" *ngIf="this.getInbox()">
+  <div>
+    <div class="ui icon message" *ngIf="!this.isSignedIn()">
+      <i class="remove icon"></i>
+      <div class="content">
+        <div class="header">
+          You are not signed in!!
+        </div>
+        <p>GTFO.</p>
+      </div>
+    </div>
+
+
+    <div class="ui comments">
+      <h3 class="ui dividing header">You and {{this.getChatRoom().getUser().displayName}}</h3>
+      <div class="comment" *ngFor="let message of this.getChatRoom().getMessages()">
+        <a class="avatar">
+            <img src="{{message.getSender().photoURL}}">
+          </a>
+        <div class="content">
+          <span class="author">{{message.getSender().displayName}}</span>
+          <div class="metadata">
+            <span class="date">{{message.getSentDate().toLocaleTimeString()}}</span>
+          </div>
+          <div class="text">
+            {{message.content}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sendMessgae">
+      <div class="ui action input b">
+        <input type="text" placeholder="Send a message..."
+          (keyup.enter)="onClickSend()"
+          #inputBox>
+        <button class="ui icon button"
+          (click)="onClickSend()">
+          <i class="send icon"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

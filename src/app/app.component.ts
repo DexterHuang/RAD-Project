@@ -12,7 +12,7 @@ export class AppComponent {
       authDomain: 'rad-project2-e84f0.firebaseapp.com',
       databaseURL: 'https://rad-project2-e84f0.firebaseio.com',
       projectId: 'rad-project2-e84f0',
-      storageBucket: '',
+      storageBucket: 'rad-project2-e84f0.appspot.com',
       messagingSenderId: '998652809907'
     };
     firebase.initializeApp(config);

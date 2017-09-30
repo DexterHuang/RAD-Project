@@ -23,6 +23,9 @@ import { RequestsPageComponent } from './requests-page/requests-page/requests-pa
 import { TripsPageComponent } from './trips-page/trips-page/trips-page.component';
 import { TripListComponent } from './common/trip-list/trip-list/trip-list.component';
 import { TripListItemComponent } from './common/trip-list/trip-list-item/trip-list-item.component';
+import { InboxPageComponent } from './inbox-page/inbox-page/inbox-page.component';
+import { ChatRoomPageComponent } from './chat-room-page/chat-room-page/chat-room-page.component';
+import { RequestDetailPageComponent } from './request-detail-page/request-detail-page/request-detail-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +42,9 @@ import { TripListItemComponent } from './common/trip-list/trip-list-item/trip-li
     TripsPageComponent,
     TripListComponent,
     TripListItemComponent,
+    InboxPageComponent,
+    ChatRoomPageComponent,
+    RequestDetailPageComponent,
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule,

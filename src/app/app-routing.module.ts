@@ -1,3 +1,6 @@
+import { RequestDetailPageComponent } from './request-detail-page/request-detail-page/request-detail-page.component';
+import { ChatRoomPageComponent } from './chat-room-page/chat-room-page/chat-room-page.component';
+import { InboxPageComponent } from './inbox-page/inbox-page/inbox-page.component';
 import { TripsPageComponent } from './trips-page/trips-page/trips-page.component';
 import { RequestsPageComponent } from './requests-page/requests-page/requests-page.component';
 import { LoginPageComponent } from './login-page/login-page/login-page.component';
@@ -18,7 +21,10 @@ const routes: Routes = [
   { path: 'postRequest', component: PostRequestPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'requests', component: RequestsPageComponent },
-  { path: 'trips', component: TripsPageComponent }
+  { path: 'trips', component: TripsPageComponent },
+  { path: 'inbox', component: InboxPageComponent },
+  { path: 'inbox/chatRoom/:uid', component: ChatRoomPageComponent },
+  { path: 'request/:uid', component: RequestDetailPageComponent }
 ];
 
 @NgModule({

@@ -45,6 +45,8 @@ export class PostTripPageComponent implements OnInit {
   }
   onClickSend() {
     if (this.isFormValid()) {
+      this.trip.userUid = this.userService.getCurrentUser().uid;
+      this.trip.userName = this.userService.getCurrentUser().displayName;
       this.trip.save();
     }
   }

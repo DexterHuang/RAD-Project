@@ -37,6 +37,23 @@
   </div>
   <div class="field">
     <label>About the Item</label>
+    <div class="ui relaxed divided list">
+      <div class="item" *ngFor="let file of this.selectedFiles">
+        <i class="large image middle aligned icon"></i>
+        <div class="content">
+          <p class="header">{{file.name}}</p>
+          <div class="description">{{file.type}}</div>
+        </div>
+      </div>
+    </div>
+    <label class="custom-file-upload ui vertical animated button"
+      tabindex="0">
+      <div class="hidden content">Upload Image</div>
+      <input type="file" class="hidden" multiple (change)="onFileChange($event)"/>
+      <div class="visible content">
+        <i class="upload icon"></i>
+      </div>
+    </label>
     <div class="three fields">
       <div class="twelve wide field">
         <input type="text" placeholder="Item name"

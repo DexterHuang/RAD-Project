@@ -1,6 +1,6 @@
-<div class="ui card">
+<a class="ui card" [routerLink]="['/request/' + this.request.uid]">
   <div class="image">
-    <img src="/images/avatar2/large/kristy.png">
+    <img src="{{this.request.imageURLs[0]}}">
   </div>
   <div class="content">
     <a class="header">{{this.request.title}}</a>
@@ -17,4 +17,4 @@
       {{this.request.retailPrice}}
     </a>
   </div>
-</div>
+</a>

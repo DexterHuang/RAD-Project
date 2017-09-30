@@ -17,4 +17,7 @@ export class RequestService {
   getRequests() {
     return this.requests;
   }
+  getRequest(uid: string) {
+    return this.getRequests().find(request => request.uid === uid);
+  }
 }
