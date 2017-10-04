@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Inbox } from './../../../Model/Inbox';
 import { ObjectHelper } from './../../../Utility/ObjectHelper';
 import { User } from './../../../Model/User';
@@ -10,11 +11,11 @@ export class UserService {
   private currentUser: User;
   public initialized = false;
   private inbox: Inbox;
-  private inboxListener = null;
-  constructor() {
+  private inboxRef: firebase.database.Reference = null;
+  constructor(private router: Router) {
     firebase.auth().onAuthStateChanged(async (user) => {
-      if (this.inboxListener !== null) {
-        this.inboxListener.remove();
+      if (this.inboxRef != null) {
+        this.inboxRef.off('value');
       }
       if (user) {
         this.currentFirebaseUser = user;
@@ -30,8 +31,8 @@ export class UserService {
           this.currentUser = u;
           await firebase.database().ref('users/' + user.uid).update(u);
         }
-        const inboxRef = firebase.database().ref('inboxes/' + user.uid);
-        this.inboxListener = await inboxRef.on('value', async (ee) => {
+        this.inboxRef = firebase.database().ref('inboxes/' + user.uid);
+        await this.inboxRef.on('value', async (ee) => {
           if (ee.exists()) {
             this.inbox = ObjectHelper.toObject(ee.val(), Inbox);
           } else {
@@ -48,7 +49,9 @@ export class UserService {
   }
   public signIn() {
     const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider);
+    firebase.auth().signInWithPopup(provider).then(e => {
+      this.router.navigate(['home']);
+    });
   }
   public IsSignedIn() {
     if (this.currentFirebaseUser) {
@@ -58,7 +61,9 @@ export class UserService {
     }
   }
   public signOut() {
-    firebase.auth().signOut();
+    firebase.auth().signOut().then(e => {
+      this.router.navigate(['/home']);
+    });
   }
   public getCurrentUser() {
     return this.currentUser;

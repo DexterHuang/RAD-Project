@@ -19,6 +19,5 @@ export class NavbarComponent implements OnInit {
   }
   onClickSignOut() {
     this.userService.signOut();
-    this.router.navigate(['/home']);
   }
 }
